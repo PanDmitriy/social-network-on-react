@@ -1,6 +1,6 @@
 {
-  "name": "social-network",
   "homepage": "https://pandmitriy.github.io/social-network-on-react/",
+  "name": "social-network",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
