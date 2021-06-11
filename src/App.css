@@ -6,7 +6,7 @@
   grid-template-columns: 20% 65% 15%;
   grid-template-areas: 
     'header header header'
-    'info content widgets'
+    'info-user content widgets'
     'navbar content widgets'
     'footer footer footer';
 }
