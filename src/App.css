@@ -2,11 +2,12 @@
 .wrapper {
   max-width: 100%;
   display: grid;
-  grid-template-rows: 4rem 1fr 1fr 5rem;
+  grid-template-rows: 4rem 30rem 20rem 1fr 5rem;
   grid-template-columns: 20% 65% 15%;
   grid-template-areas: 
     'header header header'
     'info-user content widgets'
     'navbar content widgets'
+    'none content wwidgets'
     'footer footer footer';
 }

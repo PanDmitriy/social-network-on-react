@@ -1,0 +1,28 @@
+.item {
+  margin: 0.2rem;
+  padding: 1rem;
+  background-color: burlywood;
+  color: #222;
+  border-radius: 2rem;
+  text-align: center;
+}
+
+.header {
+  width: 3rem;
+  display: flex;
+  margin: auto;
+
+}
+
+.header img {
+  border-radius: 50%;
+}
+
+.message {
+  margin: 0.1rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}

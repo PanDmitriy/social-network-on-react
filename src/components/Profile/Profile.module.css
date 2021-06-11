@@ -13,8 +13,3 @@
 .avatar img {
   width: 6rem;
 }
-
-.posts {
-  display: grid;
-  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
-}
