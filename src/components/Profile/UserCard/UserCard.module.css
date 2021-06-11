@@ -1,0 +1,16 @@
+
+.content {
+  margin: 0.2rem;
+  padding: 2rem 1rem 0;
+  background-color:bisque;
+}
+
+.img img{
+  width: 100%;
+  border-radius: 6rem;
+}
+
+.name {
+  margin-top: 1rem;
+  text-align: center;
+}
