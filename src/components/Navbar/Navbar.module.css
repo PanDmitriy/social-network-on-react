@@ -1,6 +1,7 @@
 
 .nav {
   background-color: aqua;
+  margin: 0.2rem;
   grid-area: navbar;
   display: flex;
 }
