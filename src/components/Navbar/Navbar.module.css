@@ -15,4 +15,9 @@
 .item {
   padding-bottom: 0.5rem;
   text-decoration: none;
+  color: aliceblue;
+}
+
+.item:hover {
+  color: coral;
 }
