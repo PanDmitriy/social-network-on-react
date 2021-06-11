@@ -7,9 +7,11 @@
 }
 
 .items {
-
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
 }
 
 .item {
-
+  padding-bottom: 0.5rem;
 }

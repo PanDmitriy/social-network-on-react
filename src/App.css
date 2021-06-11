@@ -11,3 +11,7 @@
     'none content wwidgets'
     'footer footer footer';
 }
+
+.content {
+  grid-area: content;
+}
