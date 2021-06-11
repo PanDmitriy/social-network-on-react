@@ -1,0 +1,14 @@
+
+.nav {
+  background-color: aqua;
+  grid-area: navbar;
+  display: flex;
+}
+
+.items {
+
+}
+
+.item {
+
+}

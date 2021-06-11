@@ -1,0 +1,14 @@
+
+.content {
+  background-color: darkblue;
+  color: #fff;
+  grid-area: content;
+}
+
+.content img {
+  max-width: 100%;
+}
+
+.avatar img {
+  width: 6rem;
+}

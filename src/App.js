@@ -1,15 +1,15 @@
 import './App.css';
-import { ProfilePage } from './components/ProfilePage';
-import { Header } from './components/Header';
-import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
+import { Profile } from './components/Profile/Profile';
+import { Header } from './components/Header/Header';
+import { Navbar } from './components/Navbar/Navbar';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   return (
     <div className='wrapper' id='grid'>
       <Header/>
         <Navbar/>
-        <ProfilePage/>
+        <Profile/>
       <Footer/>
     </div>
   );
