@@ -1,0 +1,23 @@
+.content {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
+.dialogs {
+  display: flex;
+  flex-direction: column;
+}
+.dialog {
+  margin: 0.2rem;
+  padding: 0.2rem;
+  text-decoration: none;
+  color: #222;
+}
+
+.dialog:hover {
+  color: red;
+}
+
+.active {
+  text-decoration: underline;
+}
