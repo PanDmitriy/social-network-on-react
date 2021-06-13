@@ -10,6 +10,7 @@ import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Main } from './components/Main/Main';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <Navbar/>
           <div className='content'>
             <Switch>
+              <Route exact path='/'>
+                <Main/>
+              </Route>
               <Route path='/profile'>
                 <Profile/>
               </Route>
