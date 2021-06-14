@@ -30,6 +30,6 @@
   color: red;
 }
 
-.dialog .active {
+.active {
   text-decoration: underline;
 }
