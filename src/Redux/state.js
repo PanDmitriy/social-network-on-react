@@ -3,7 +3,8 @@ let state = {
     posts: [
       {id: 1, message: 'Hi everyone!', likesCount: 2},
       {id: 2, message: 'I is my first post', likesCount: 13},
-      {id: 3, message: 'Subscribe and read my posts.', likesCount: 18}
+      {id: 3, message: 'Subscribe and read my posts.', likesCount: 18},
+      {id: 4, message: 'Has subscribe me, friend?', likesCount: 15},
     ]
   },
   messagePage: {
@@ -14,6 +15,7 @@ let state = {
       {id: 4, name: 'Daniil'},
       {id: 5, name: 'Jula'},
       {id: 6, name: 'Petr'},
+      {id: 7, name: 'Timo'},
     ], 
     messages: [
       {id: 1, message: 'Hi!'},
@@ -22,6 +24,7 @@ let state = {
       {id: 4, message: 'I am funny. Are you too?'},
       {id: 5, message: 'Yes.'},
       {id: 6, message: 'Goodbay!'},
+      {id: 7, message: 'Bay!'},
     ]
   }
 }

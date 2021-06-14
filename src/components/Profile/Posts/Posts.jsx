@@ -12,9 +12,13 @@ export const Posts = props => {
       </div> 
       </div>
       <div className={s.posts}>
-        <Post message={postsData[2].message} like={postsData[2].likesCount} />
-        <Post message={postsData[1].message} like={postsData[1].likesCount} />
-        <Post message={postsData[0].message} like={postsData[0].likesCount} />
+        { 
+          postsData.map(
+          post => (
+              <Post key={post.id} message={post.message} like={post.likesCount} />
+            )
+          ) 
+        }
       </div>
     </>
   )

@@ -28,20 +28,22 @@ export const Dialogs = props => {
   return (
     <div className={`${s.content} container`}>
       <div className={s.dialogs}>
-        <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-        <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
-        <DialogItem name={dialogsData[2].name} id={dialogsData[2].id}/>
-        <DialogItem name={dialogsData[3].name} id={dialogsData[3].id}/>
-        <DialogItem name={dialogsData[4].name} id={dialogsData[4].id}/>
-        <DialogItem name={dialogsData[5].name} id={dialogsData[5].id}/>
+        {
+          dialogsData.map( 
+            dialog => (
+              <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>
+            )
+          )
+        }
       </div>
       <div className={s.messanges}>
-        <MessageItem message={messagesData[0].message}/>
-        <MessageItem message={messagesData[1].message}/>
-        <MessageItem message={messagesData[2].message}/>
-        <MessageItem message={messagesData[3].message}/>
-        <MessageItem message={messagesData[4].message}/>
-        <MessageItem message={messagesData[5].message}/>
+        {
+          messagesData.map(
+            message => (
+              <MessageItem key={message.id} message={message.message}/>
+            )
+          )
+        }
       </div>
     </div>
   )
