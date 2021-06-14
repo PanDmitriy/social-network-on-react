@@ -1,4 +1,13 @@
 
+.added {
+  margin: 0.5rem 0;
+  padding: 1rem;
+}
+
+.added textarea {
+  margin-top: 0.2rem;
+  width: 100%;
+}
 
 .posts {
   display: grid;

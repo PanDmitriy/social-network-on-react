@@ -12,10 +12,10 @@ import { Settings } from './components/Settings/Settings';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Main } from './components/Main/Main';
 
-function App() {
+function App(props) {
   return (
     <Router>
-      <div className='wrapper' id='grid'>
+      <div className='wrapper'>
         <Header/>
           <UserCard/>
           <Navbar/>
@@ -24,12 +24,23 @@ function App() {
               <Route exact path='/'>
                 <Main/>
               </Route>
-              <Route path='/profile'>
-                <Profile/>
-              </Route>
-              <Route path='/dialogs'>
-                <Dialogs/>
-              </Route>
+              <Route 
+                path='/profile' 
+                render={() => 
+                  <Profile 
+                    posts={props.state.profilePage.posts}
+                  />
+                } 
+              />
+              <Route 
+                path='/dialogs' 
+                render={ () => 
+                  <Dialogs 
+                    dialogsData={props.state.messagePage.dialogs} 
+                    messagesData={props.state.messagePage.messages}
+                  /> 
+                  }
+              />
               <Route path='/news'>
                 <News/>
               </Route>
