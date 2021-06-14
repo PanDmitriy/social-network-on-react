@@ -5,13 +5,16 @@ import s from './Dialogs.module.css';
 const DialogItem = (props) => {
   const path = `/dialogs/${props.id}`
   return (
-    <NavLink 
-      to={path} 
-      activeClassName={s.active} 
-      className={s.dialog}
-    >
-      {props.name}
-    </NavLink>
+    <>
+      <NavLink 
+        to={path} 
+        activeClassName={s.active}
+        className={s.dialog}
+      >
+        <img src="https://w7.pngwing.com/pngs/555/90/png-transparent-computer-icons-name-tag-miscellaneous-monochrome-silhouette.png" alt="" />
+        <span>{props.name}</span>
+      </NavLink>
+    </>
   )
 }
 

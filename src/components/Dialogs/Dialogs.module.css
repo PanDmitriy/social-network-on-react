@@ -7,17 +7,29 @@
   display: flex;
   flex-direction: column;
 }
+
 .dialog {
+  display: flex;
+  align-items: center;
   margin: 0.2rem;
   padding: 0.2rem;
   text-decoration: none;
   color: #222;
 }
 
+.dialog img {
+  width: 3rem;
+}
+
+.dialog span {
+  margin-left: 0.2rem;
+  padding-left: 0.5rem;
+}
+
 .dialog:hover {
   color: red;
 }
 
-.active {
+.dialog .active {
   text-decoration: underline;
 }
