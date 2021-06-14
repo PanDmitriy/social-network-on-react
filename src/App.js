@@ -4,7 +4,7 @@ import { Header } from './components/Header/Header';
 import { Navbar } from './components/Navbar/Navbar';
 import { Footer } from './components/Footer/Footer';
 import { UserCard } from './components/Profile/UserCard/UserCard';
-import { Dialogs} from './components/Dialogs/Dialogs';
+import { Dialogs } from './components/Dialogs/Dialogs';
 import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
@@ -28,7 +28,7 @@ function App(props) {
                 path='/profile' 
                 render={() => 
                   <Profile 
-                    posts={props.state.profilePage.posts}
+                    state={props.state.profilePage}
                   />
                 } 
               />
@@ -36,8 +36,7 @@ function App(props) {
                 path='/dialogs' 
                 render={ () => 
                   <Dialogs 
-                    dialogsData={props.state.messagePage.dialogs} 
-                    messagesData={props.state.messagePage.messages}
+                    state={props.state.dialogsPage}
                   /> 
                   }
               />

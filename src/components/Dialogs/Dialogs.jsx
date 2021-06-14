@@ -24,12 +24,12 @@ const MessageItem = (props) => {
 }
 
 export const Dialogs = props => {
-  const { dialogsData, messagesData } = props;
+  const { dialogs, messages } = props.state;
   return (
     <div className={`${s.content} container`}>
       <div className={s.dialogs}>
         {
-          dialogsData.map( 
+          dialogs.map( 
             dialog => (
               <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>
             )
@@ -38,7 +38,7 @@ export const Dialogs = props => {
       </div>
       <div className={s.messanges}>
         {
-          messagesData.map(
+          messages.map(
             message => (
               <MessageItem key={message.id} message={message.message}/>
             )
