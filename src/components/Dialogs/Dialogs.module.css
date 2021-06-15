@@ -33,3 +33,20 @@
 .active {
   text-decoration: underline;
 }
+
+.columnRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messages {
+}
+
+.send {
+}
+.send textarea {
+  margin: 0.5rem;
+  padding: 0 0.5rem 0;
+  width: 100%;
+}

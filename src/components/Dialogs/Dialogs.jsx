@@ -26,6 +26,18 @@ const MessageItem = (props) => {
   )
 }
 
+const SendMessage = () => {
+  const sendMsg = () => {
+    alert('Message a sended!')
+  }
+  return (
+    <div className={s.send}>
+      <textarea></textarea>
+      <button onClick={sendMsg}>Отправить</button>
+    </div>
+  )
+}
+
 export const Dialogs = props => {
   const { dialogs, messages } = props.state;
   return (
@@ -39,15 +51,18 @@ export const Dialogs = props => {
           )
         }
       </div>
-      <div className={s.messanges}>
-        {
-          messages.map(
-            message => (
-              <MessageItem key={message.id} message={message.message}/>
+      <div className={s.columnRight}>
+        <div className={s.messages}>
+          {
+            messages.map(
+              message => (
+                <MessageItem key={message.id} message={message.message}/>
+              )
             )
-          )
-        }
+          }
+        </div>
+          <SendMessage/>
+        </div>
       </div>
-    </div>
   )
 }
