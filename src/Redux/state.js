@@ -31,6 +31,8 @@ let state = {
   }
 }
 
+console.log('Prev state App', state);
+
 export const addNewPost = (value) => {
   const newPost = {
     id: Date(),
@@ -39,6 +41,20 @@ export const addNewPost = (value) => {
   };
   state.profilePage.posts.push(newPost);
   rerenderEntireTree(state);
+
+  console.log('New state App', state)
 }
+
+export const sendMessage = (value) => {
+  const newMessage = {
+    id: Date(),
+    message: value,
+  };
+  state.dialogsPage.messages.push(newMessage);
+  rerenderEntireTree(state);
+
+  console.log('New state App', state)
+}
+
 
 export default state;

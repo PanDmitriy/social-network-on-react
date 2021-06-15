@@ -38,6 +38,7 @@ function App(props) {
                 render={ () => 
                   <Dialogs 
                     state={props.state.dialogsPage}
+                    sendMessage={props.sendMessage}
                   /> 
                   }
               />

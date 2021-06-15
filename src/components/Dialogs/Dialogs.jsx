@@ -26,13 +26,16 @@ const MessageItem = (props) => {
   )
 }
 
-const SendMessage = () => {
+const SendMessage = props => {
+  const valueMassage = React.createRef()
   const sendMsg = () => {
-    alert('Message a sended!')
+    const value = valueMassage.current.value;
+    props.sendMessage(value);
+    valueMassage.current.value = '';
   }
   return (
     <div className={s.send}>
-      <textarea></textarea>
+      <textarea ref={valueMassage} ></textarea>
       <button onClick={sendMsg}>Отправить</button>
     </div>
   )
@@ -61,7 +64,7 @@ export const Dialogs = props => {
             )
           }
         </div>
-          <SendMessage/>
+          <SendMessage sendMessage={props.sendMessage} />
         </div>
       </div>
   )
