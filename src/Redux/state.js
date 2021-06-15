@@ -8,6 +8,7 @@ let state = {
       {id: 3, message: 'Subscribe and read my posts.', likesCount: 18},
       {id: 4, message: 'Has subscribe me, friend?', likesCount: 15},
     ],
+    newPostText: '',
   },
   dialogsPage: {
     dialogs: [
@@ -33,13 +34,14 @@ let state = {
 
 console.log('Prev state App', state);
 
-export const addNewPost = (value) => {
+export const addNewPost = () => {
   const newPost = {
     id: Date(),
-    message: value,
+    message: state.profilePage.newPostText,
     likesCount: 0
   };
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
   rerenderEntireTree(state);
 
   console.log('New state App', state)
@@ -54,6 +56,11 @@ export const sendMessage = (value) => {
   rerenderEntireTree(state);
 
   console.log('New state App', state)
+}
+
+export const updateNewPostText = (value) => {
+  state.profilePage.newPostText = value;
+  rerenderEntireTree(state);
 }
 
 

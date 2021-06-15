@@ -3,20 +3,23 @@ import { Post } from './Post/Post';
 import s from './Posts.module.css'
 
 export const Posts = props => {
-  const { posts } = props.state;
+  const { posts, newPostText } = props.state;
 
   const newPostInput = React.createRef();
 
   const addNewPost = () => {
+    props.addNewPost();
+  }
+
+  const onChangeNewPost = () => {
     const value = newPostInput.current.value
-    props.addNewPost(value);
-    newPostInput.current.value = '';
+    props.updateNewPostText(value)
   }
   
   return (
     <>
       <div className={s.added}>New post<div> 
-        <textarea ref={newPostInput} ></textarea> 
+        <textarea onChange={onChangeNewPost} ref={newPostInput} value={newPostText} /> 
         <button onClick={addNewPost}>Create</button> 
       </div> 
       </div>
