@@ -9,3 +9,9 @@
   margin: 0.25rem;
   /* width: 4rem; */
 }
+
+.logo {
+  height: 100%;
+  text-decoration: none;
+  color: #222;
+}

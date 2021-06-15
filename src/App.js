@@ -17,42 +17,42 @@ function App(props) {
     <Router>
       <div className='wrapper'>
         <Header/>
-          <UserCard/>
-          <Navbar/>
-          <div className='content'>
-            <Switch>
-              <Route exact path='/'>
-                <Main/>
-              </Route>
-              <Route 
-                path='/profile' 
-                render={() => 
-                  <Profile 
-                    state={props.state.profilePage}
-                    addNewPost={props.addNewPost}
-                  />
-                } 
-              />
-              <Route 
-                path='/dialogs' 
-                render={ () => 
-                  <Dialogs 
-                    state={props.state.dialogsPage}
-                    sendMessage={props.sendMessage}
-                  /> 
-                  }
-              />
-              <Route path='/news'>
-                <News/>
-              </Route>
-              <Route path='/music'>
-                <Music/>
-              </Route>
-              <Route path='/settings'>
-                <Settings/>
-              </Route>
-            </Switch>
-          </div>
+        <UserCard/>
+        <Navbar/>
+        <div className='content'>
+          <Switch>
+            <Route exact path='/social-network-on-react'>
+              <Main/>
+            </Route>
+            <Route 
+              path='/profile' 
+              render={() => 
+                <Profile 
+                  state={props.state.profilePage}
+                  addNewPost={props.addNewPost}
+                />
+              } 
+            />
+            <Route 
+              path='/dialogs' 
+              render={ () => 
+                <Dialogs 
+                  state={props.state.dialogsPage}
+                  sendMessage={props.sendMessage}
+                /> 
+                }
+            />
+            <Route path='/news'>
+              <News/>
+            </Route>
+            <Route path='/music'>
+              <Music/>
+            </Route>
+            <Route path='/settings'>
+              <Settings/>
+            </Route>
+          </Switch>
+        </div>
         <Footer/>
       </div>
     </Router>
