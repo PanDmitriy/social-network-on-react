@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
 
@@ -27,15 +27,21 @@ const MessageItem = (props) => {
 }
 
 const SendMessage = props => {
-  const valueMassage = React.createRef()
-  const sendMsg = () => {
+  const valueMassage = React.createRef();
+  const [text, setText] = React.useState('');
+
+  const changeValueMessage = () => {
     const value = valueMassage.current.value;
-    props.sendMessage(value);
-    valueMassage.current.value = '';
+    setText(value);
+    console.log(value);
+  }
+  const sendMsg = () => {
+    props.sendMessage(text);
+    setText('');
   }
   return (
     <div className={s.send}>
-      <textarea ref={valueMassage} ></textarea>
+      <textarea onChange={changeValueMessage} ref={valueMassage} value={text} ></textarea>
       <button onClick={sendMsg}>Отправить</button>
     </div>
   )
