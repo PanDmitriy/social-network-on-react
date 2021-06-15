@@ -29,6 +29,7 @@ function App(props) {
                 render={() => 
                   <Profile 
                     state={props.state.profilePage}
+                    addNewPost={props.addNewPost}
                   />
                 } 
               />
