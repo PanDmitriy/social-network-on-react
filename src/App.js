@@ -30,7 +30,6 @@ function App(props) {
                 <Profile 
                   state={props.state.profilePage}
                   addNewPost={props.addNewPost}
-                  updateNewPostText={props.updateNewPostText}
                 />
               } 
             />
