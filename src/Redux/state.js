@@ -1,4 +1,10 @@
+// Action types
+const SEND_MESSAGE = 'SEND_MESSAGE';
+const ADD_NEW_POST = 'ADD_NEW_POST';
 
+
+
+// Global app store
 let store = {
   _state: {
     profilePage: {
@@ -39,60 +45,52 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-
+  _addNewPost(value) {
+    const newPost = {
+      id: Date(),
+      message: value,
+      likesCount: 0
+    };
+    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.newPostText = '';
+    this._callSubscriber(this._state);
   
-  // _addNewPost(value) {
-  //   const newPost = {
-  //     id: Date(),
-  //     message: value,
-  //     likesCount: 0
-  //   };
-  //   this._state.profilePage.posts.push(newPost);
-  //   this._state.profilePage.newPostText = '';
-  //   this._callSubscriber(this._state);
-  
-  //   console.log('New state App', this._state)
-  // },
-  // _sendMessage(value) {
-  //   const newMessage = {
-  //     id: Date(),
-  //     message: value,
-  //   };
-  //   this._state.dialogsPage.messages.push(newMessage);
-  //   this._callSubscriber(this._state);
+    console.log('New state App', this._state)
+  },
+  _sendMessage(value) {
+    const newMessage = {
+      id: Date(),
+      message: value,
+    };
+    this._state.dialogsPage.messages.push(newMessage);
+    this._callSubscriber(this._state);
 
-  //   console.log('New state App', this._state)
-  // },
-
-
+    console.log('New state App', this._state)
+  },
   dispatch(action) {
-    if (action.type === 'ADD-NEW-POST') {
-      const newPost = {
-        id: Date(),
-        message: action.value,
-        likesCount: 0
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
-      console.log('New state App', this._state)
-
-      // this._sendMessage(action.value) // the variant for refactor.
-
-    } else if (action.type === 'SEND-MESSAGE') {
-      const newMessage = {
-        id: Date(),
-        message: action.value,
-      };
-      this._state.dialogsPage.messages.push(newMessage);
-      this._callSubscriber(this._state);
-      console.log('New state App', this._state)
-
-      // this._addNewPost(action.value) // the variant for refactor.
-
+    if (action.type === ADD_NEW_POST) {
+      this._addNewPost(action.value)
+    } else if (action.type === SEND_MESSAGE) {
+      this._sendMessage(action.value)
     }
   },
 }
+
+// Action Creators
+export const sendMassageActionCreate = value => (
+  {
+    type: SEND_MESSAGE,
+    value: value,
+  }
+)
+
+export const addNewPostActionCreate = value => (
+  {
+    type: ADD_NEW_POST,
+    value: value,
+  }
+)
+//-------------------------------------
 
 console.log('Prev state App', store.getState());
 

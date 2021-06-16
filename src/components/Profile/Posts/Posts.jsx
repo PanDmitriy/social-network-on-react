@@ -1,41 +1,56 @@
+import { Icon } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import React from 'react';
+import { addNewPostActionCreate } from '../../../Redux/state';
 import { Post } from './Post/Post';
 import s from './Posts.module.css'
 
 export const Posts = props => {
   const { posts } = props.state;
 
-  const newPostInput = React.createRef();
   const [ valueNewPost, setValueNewPost ] = React.useState('')
-  const [ placeholder, setPlaceholder ] = React.useState('Enter text post.')
+  const [ labelInput, setLabelInput ] = React.useState('Enter text post.')
   
 
   const addNewPost = () => {
     if (valueNewPost === ''){
-      setPlaceholder('The value cannot be null. Please, enter text post.')
+      setLabelInput('The value cannot be null. Please, enter text post.')
       console.error('The value cannot be null.');
       return
     }
-    const action = {
-      type: 'ADD-NEW-POST',
-      value: valueNewPost,
-    };
-    props.dispatch(action);
+    props.dispatch(addNewPostActionCreate(valueNewPost));
     setValueNewPost('');
-    setPlaceholder('Enter text post.')
+    setTimeout(()=> {
+      setLabelInput('Enter text post.')
+    }, 5000);
+    setLabelInput('New post published.')
   }
 
-  const onChangeNewPost = () => {
-    const value = newPostInput.current.value
-    setValueNewPost(value)
+  const onChangeNewPost = event => {
+    setValueNewPost(event.target.value)
   }
   
   return (
     <>
-      <div className={s.added}>New post<div> 
-        <textarea placeholder={placeholder} onChange={onChangeNewPost} ref={newPostInput} value={valueNewPost} /> 
-        <button onClick={addNewPost}>Create</button> 
-      </div> 
+      <div className={s.added}>
+        <div className={s.title}>Publish a new post</div>
+        <div> 
+          <TextField 
+            fullWidth
+            variant='outlined'
+            label={labelInput}
+            placeholder='New post' 
+            onChange={onChangeNewPost} 
+            value={valueNewPost} 
+          /> 
+          <Button 
+            
+            startIcon={<Icon>create</Icon>}
+            onClick={addNewPost}
+          >
+            Create
+          </Button> 
+        </div> 
       </div>
       <div className={s.posts}>
         { 

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
+import Avatar from '@material-ui/core/Avatar';
+import FaceIcon  from '@material-ui/icons/Face';
+import { Button, Icon, TextField } from '@material-ui/core';
+import { sendMassageActionCreate } from '../../Redux/state';
 
 const DialogItem = (props) => {
   const path = `/dialogs/${props.id}`
@@ -11,7 +15,9 @@ const DialogItem = (props) => {
         activeClassName={s.active}
         className={s.dialog}
       >
-        <img src="https://w7.pngwing.com/pngs/555/90/png-transparent-computer-icons-name-tag-miscellaneous-monochrome-silhouette.png" alt="" />
+        <Avatar>
+          <FaceIcon style={{color: '#222'}}  />
+        </Avatar>
         <span>{props.name}</span>
       </NavLink>
     </>
@@ -27,25 +33,29 @@ const MessageItem = (props) => {
 }
 
 const SendMessage = props => {
-  const valueMassage = React.createRef();
-  const [textMessage, setTextMessage] = React.useState('');
+  const [textMessage, setTextMessage] = useState('');
 
-  const changeValueMessage = () => {
-    const value = valueMassage.current.value;
-    setTextMessage(value);
+  const changeValueMessage = (event) => {
+    setTextMessage(event.target.value);
+    // console.log();
   }
   const sendMessage = () => {
-    const action = {
-      type: 'SEND-MESSAGE',
-      value: textMessage,
-    }
-    props.dispatch(action);
+    props.dispatch(sendMassageActionCreate(textMessage));
     setTextMessage('');
   }
   return (
     <div className={s.send}>
-      <textarea onChange={changeValueMessage} ref={valueMassage} value={textMessage} ></textarea>
-      <button onClick={sendMessage}>Отправить</button>
+      <TextField 
+        id="outlined-multiline-flexible"
+        label="You message" 
+        variant="outlined"
+        fullWidth
+        multiline
+        rowsMax={4}
+        onChange={changeValueMessage} 
+        value={textMessage}
+      />
+      <Button variant='outlined' endIcon={<Icon>send</Icon>} onClick={sendMessage}>Send</Button>
     </div>
   )
 }

@@ -1,12 +1,23 @@
 
 .added {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: #222;
+  border-radius: 1rem;
   margin: 0.5rem 0;
   padding: 1rem;
 }
+.title {
+  margin: 1rem 0;
+}
+.added input {
 
-.added textarea {
-  margin-top: 0.2rem;
-  width: 100%;
+}
+
+.added button {
+  margin: 0.5rem 0;
+  
 }
 
 .posts {
