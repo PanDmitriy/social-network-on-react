@@ -28,21 +28,24 @@ const MessageItem = (props) => {
 
 const SendMessage = props => {
   const valueMassage = React.createRef();
-  const [text, setText] = React.useState('');
+  const [textMessage, setTextMessage] = React.useState('');
 
   const changeValueMessage = () => {
     const value = valueMassage.current.value;
-    setText(value);
-    console.log(value);
+    setTextMessage(value);
   }
-  const sendMsg = () => {
-    props.sendMessage(text);
-    setText('');
+  const sendMessage = () => {
+    const action = {
+      type: 'SEND-MESSAGE',
+      value: textMessage,
+    }
+    props.dispatch(action);
+    setTextMessage('');
   }
   return (
     <div className={s.send}>
-      <textarea onChange={changeValueMessage} ref={valueMassage} value={text} ></textarea>
-      <button onClick={sendMsg}>Отправить</button>
+      <textarea onChange={changeValueMessage} ref={valueMassage} value={textMessage} ></textarea>
+      <button onClick={sendMessage}>Отправить</button>
     </div>
   )
 }
@@ -70,7 +73,7 @@ export const Dialogs = props => {
             )
           }
         </div>
-          <SendMessage sendMessage={props.sendMessage} />
+          <SendMessage dispatch={props.dispatch} />
         </div>
       </div>
   )

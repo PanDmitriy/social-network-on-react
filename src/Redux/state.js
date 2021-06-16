@@ -30,36 +30,67 @@ let store = {
       ],
     },
   },
-  getState() {
-    return this._state
-  },
   _callSubscriber() {
     console.log('State changed');
+  },
+  getState() {
+    return this._state
   },
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-  addNewPost(value) {
-    const newPost = {
-      id: Date(),
-      message: value,
-      likesCount: 0
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
+
   
-    console.log('New state App', this._state)
-  },
-  sendMessage(value) {
-    const newMessage = {
-      id: Date(),
-      message: value,
-    };
-    this._state.dialogsPage.messages.push(newMessage);
-    this._callSubscriber(this._state);
+  // _addNewPost(value) {
+  //   const newPost = {
+  //     id: Date(),
+  //     message: value,
+  //     likesCount: 0
+  //   };
+  //   this._state.profilePage.posts.push(newPost);
+  //   this._state.profilePage.newPostText = '';
+  //   this._callSubscriber(this._state);
   
-    console.log('New state App', this._state)
+  //   console.log('New state App', this._state)
+  // },
+  // _sendMessage(value) {
+  //   const newMessage = {
+  //     id: Date(),
+  //     message: value,
+  //   };
+  //   this._state.dialogsPage.messages.push(newMessage);
+  //   this._callSubscriber(this._state);
+
+  //   console.log('New state App', this._state)
+  // },
+
+
+  dispatch(action) {
+    if (action.type === 'ADD-NEW-POST') {
+      const newPost = {
+        id: Date(),
+        message: action.value,
+        likesCount: 0
+      };
+      this._state.profilePage.posts.push(newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber(this._state);
+      console.log('New state App', this._state)
+
+      // this._sendMessage(action.value) // the variant for refactor.
+
+    } else if (action.type === 'SEND-MESSAGE') {
+      const newMessage = {
+        id: Date(),
+        message: action.value,
+      };
+      this._state.dialogsPage.messages.push(newMessage);
+      this._callSubscriber(this._state);
+      console.log('New state App', this._state)
+
+      // this._addNewPost(action.value) // the variant for refactor.
+
+    }
   },
 }
 

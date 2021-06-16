@@ -7,10 +7,22 @@ export const Posts = props => {
 
   const newPostInput = React.createRef();
   const [ valueNewPost, setValueNewPost ] = React.useState('')
+  const [ placeholder, setPlaceholder ] = React.useState('Enter text post.')
+  
 
   const addNewPost = () => {
-    props.addNewPost(valueNewPost);
+    if (valueNewPost === ''){
+      setPlaceholder('The value cannot be null. Please, enter text post.')
+      console.error('The value cannot be null.');
+      return
+    }
+    const action = {
+      type: 'ADD-NEW-POST',
+      value: valueNewPost,
+    };
+    props.dispatch(action);
     setValueNewPost('');
+    setPlaceholder('Enter text post.')
   }
 
   const onChangeNewPost = () => {
@@ -21,7 +33,7 @@ export const Posts = props => {
   return (
     <>
       <div className={s.added}>New post<div> 
-        <textarea onChange={onChangeNewPost} ref={newPostInput} value={valueNewPost} /> 
+        <textarea placeholder={placeholder} onChange={onChangeNewPost} ref={newPostInput} value={valueNewPost} /> 
         <button onClick={addNewPost}>Create</button> 
       </div> 
       </div>
