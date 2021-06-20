@@ -43,6 +43,12 @@ const SendMessage = props => {
     props.dispatch(sendMassageActionCreate(textMessage));
     setTextMessage('');
   }
+  const keyPressHandler = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      sendMessage();
+    }
+  }
   return (
     <div className={s.send}>
       <TextField 
@@ -54,6 +60,7 @@ const SendMessage = props => {
         rowsMax={4}
         onChange={changeValueMessage} 
         value={textMessage}
+        onKeyPress={keyPressHandler}
       />
       <Button variant='outlined' endIcon={<Icon>send</Icon>} onClick={sendMessage}>Send</Button>
     </div>

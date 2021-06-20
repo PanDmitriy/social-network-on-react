@@ -9,10 +9,10 @@ let store = {
   _state: {
     profilePage: {
       posts: [
-        {id: 1, message: 'Hi everyone!', likesCount: 2},
-        {id: 2, message: 'I is my first post', likesCount: 13},
-        {id: 3, message: 'Subscribe and read my posts.', likesCount: 18},
-        {id: 4, message: 'Has subscribe me, friend?', likesCount: 15},
+        {id: '1', message: 'Hi everyone!', likesCount: 2},
+        {id: '2', message: 'I is my first post', likesCount: 13},
+        {id: '3', message: 'Subscribe and read my posts.', likesCount: 18},
+        {id: '4', message: 'Has subscribe me, friend?', likesCount: 15},
       ],
     },
     dialogsPage: {
@@ -59,7 +59,7 @@ let store = {
   },
   _sendMessage(value) {
     const newMessage = {
-      id: Date(),
+      id: Date.now().toString(),
       message: value,
     };
     this._state.dialogsPage.messages.push(newMessage);

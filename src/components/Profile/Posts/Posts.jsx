@@ -1,32 +1,54 @@
-import { Icon } from '@material-ui/core';
-import { Button, TextField } from '@material-ui/core';
 import React from 'react';
+import s from './Posts.module.css'
+import { Icon } from '@material-ui/core';
+import { Button, TextField, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert'
 import { addNewPostActionCreate } from '../../../Redux/state';
 import { Post } from './Post/Post';
-import s from './Posts.module.css'
+
+const Alert = props => (
+  <MuiAlert elevation={6} variant='filled' {...props} />
+)
 
 export const Posts = props => {
   const { posts } = props.state;
 
   const [ valueNewPost, setValueNewPost ] = React.useState('')
-  const [ labelInput, setLabelInput ] = React.useState('Enter text post.')
+  const [ alert, setAlert ] = React.useState({
+    open: false,
+    text: 'Alert',
+    type: 'info',
+    vertical: 'bottom',
+    horizontal: 'right',
+  })
+  const {open, text, type, vertical, horizontal} = alert
   
+  const handleClose = () => {
+    setAlert({...alert, open: false,});
+  };
 
   const addNewPost = () => {
     if (valueNewPost === ''){
-      setLabelInput('The value cannot be null. Please, enter text post.')
-      console.error('The value cannot be null.');
+      setAlert({ 
+        ...alert, 
+        open: true,
+        type: 'error',
+        text: 'The value cannot be null',
+      });
       return
     }
     props.dispatch(addNewPostActionCreate(valueNewPost));
     setValueNewPost('');
-    setTimeout(()=> {
-      setLabelInput('Enter text post.')
-    }, 5000);
-    setLabelInput('New post published.')
+    setAlert({
+      ...alert,
+      open: true,
+      type: 'success',
+      text: 'Publish your post success!',
+    })
   }
 
   const onChangeNewPost = event => {
+    console.log(event);
     setValueNewPost(event.target.value)
   }
   
@@ -38,18 +60,27 @@ export const Posts = props => {
           <TextField 
             fullWidth
             variant='outlined'
-            label={labelInput}
-            placeholder='New post' 
+            label='Enter your post'
             onChange={onChangeNewPost} 
-            value={valueNewPost} 
+            value={valueNewPost}
+            onKeyPress={event => console.log('keyPress',event)}
           /> 
-          <Button 
-            
+          <Button
             startIcon={<Icon>create</Icon>}
             onClick={addNewPost}
           >
             Create
-          </Button> 
+          </Button>
+          <Snackbar 
+            anchorOrigin={{vertical, horizontal}}
+            open={open} 
+            autoHideDuration={6000} 
+            onClose={handleClose}
+          >
+            <Alert onClose={handleClose} severity={type}>
+              {text}
+            </Alert>
+          </Snackbar>
         </div> 
       </div>
       <div className={s.posts}>
