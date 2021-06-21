@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './Redux/state';
+import store from './Redux/store';
 
 const rerenderEntireTree = (state) => {
+  console.log('Store: ', state);
   ReactDOM.render(
     <React.StrictMode>
       <App 
@@ -20,6 +21,9 @@ const rerenderEntireTree = (state) => {
 
 rerenderEntireTree(store.getState());
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+  const state = store.getState();
+  rerenderEntireTree(state);
+});
 
 reportWebVitals();

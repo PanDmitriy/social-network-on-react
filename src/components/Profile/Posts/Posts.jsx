@@ -11,7 +11,7 @@ const Alert = props => (
 )
 
 export const Posts = props => {
-  const { posts } = props.state;
+  const posts = props.state.posts;
 
   const [ valueNewPost, setValueNewPost ] = React.useState('')
   const [ alert, setAlert ] = React.useState({
@@ -28,7 +28,7 @@ export const Posts = props => {
   };
 
   const addNewPost = () => {
-    if (valueNewPost === ''){
+    if (!valueNewPost.trim('')){
       setAlert({ 
         ...alert, 
         open: true,
@@ -48,7 +48,6 @@ export const Posts = props => {
   }
 
   const onChangeNewPost = event => {
-    console.log(event);
     setValueNewPost(event.target.value)
   }
   
@@ -63,7 +62,6 @@ export const Posts = props => {
             label='Enter your post'
             onChange={onChangeNewPost} 
             value={valueNewPost}
-            onKeyPress={event => console.log('keyPress',event)}
           /> 
           <Button
             startIcon={<Icon>create</Icon>}
