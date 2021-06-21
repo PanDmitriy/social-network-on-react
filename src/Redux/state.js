@@ -1,8 +1,5 @@
-// Action types
-const SEND_MESSAGE = 'SEND_MESSAGE';
-const ADD_NEW_POST = 'ADD_NEW_POST';
-
-
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
 
 // Global app store
 let store = {
@@ -45,52 +42,13 @@ let store = {
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-  _addNewPost(value) {
-    const newPost = {
-      id: Date(),
-      message: value,
-      likesCount: 0
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  
-    console.log('New state App', this._state)
-  },
-  _sendMessage(value) {
-    const newMessage = {
-      id: Date.now().toString(),
-      message: value,
-    };
-    this._state.dialogsPage.messages.push(newMessage);
-    this._callSubscriber(this._state);
-
-    console.log('New state App', this._state)
-  },
   dispatch(action) {
-    if (action.type === ADD_NEW_POST) {
-      this._addNewPost(action.value)
-    } else if (action.type === SEND_MESSAGE) {
-      this._sendMessage(action.value)
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+
+    this._callSubscriber(this._state);
   },
 }
-
-// Action Creators
-export const sendMassageActionCreate = value => (
-  {
-    type: SEND_MESSAGE,
-    value: value,
-  }
-)
-
-export const addNewPostActionCreate = value => (
-  {
-    type: ADD_NEW_POST,
-    value: value,
-  }
-)
-//-------------------------------------
 
 console.log('Prev state App', store.getState());
 

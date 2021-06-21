@@ -2,9 +2,9 @@ import React from 'react';
 import s from './Posts.module.css'
 import { Icon } from '@material-ui/core';
 import { Button, TextField, Snackbar } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert'
-import { addNewPostActionCreate } from '../../../Redux/state';
+import MuiAlert from '@material-ui/lab/Alert';
 import { Post } from './Post/Post';
+import { addNewPostActionCreate } from '../../../Redux/profileReducer';
 
 const Alert = props => (
   <MuiAlert elevation={6} variant='filled' {...props} />

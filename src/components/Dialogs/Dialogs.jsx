@@ -4,7 +4,7 @@ import s from './Dialogs.module.css';
 import Avatar from '@material-ui/core/Avatar';
 import FaceIcon  from '@material-ui/icons/Face';
 import { Button, Icon, TextField } from '@material-ui/core';
-import { sendMassageActionCreate } from '../../Redux/state';
+import { sendMessageActionCreate } from '../../Redux/dialogsReducer';
 
 const DialogItem = (props) => {
   const path = `/dialogs/${props.id}`
@@ -40,7 +40,7 @@ const SendMessage = props => {
     // console.log();
   }
   const sendMessage = () => {
-    props.dispatch(sendMassageActionCreate(textMessage));
+    props.dispatch(sendMessageActionCreate(textMessage));
     setTextMessage('');
   }
   const keyPressHandler = event => {
