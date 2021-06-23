@@ -28,7 +28,7 @@ function App(props) {
               path='/profile' 
               render={() => 
                 <Profile 
-                  state={props.state.profilePage}
+                  store={props.store.profilePage}
                   dispatch={props.dispatch}
                 />
               } 
@@ -37,7 +37,7 @@ function App(props) {
               path='/dialogs' 
               render={ () => 
                 <Dialogs 
-                  state={props.state.dialogsPage}
+                  store={props.store.dialogsPage}
                   dispatch={props.dispatch}
                 /> 
                 }

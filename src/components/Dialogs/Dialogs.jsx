@@ -31,8 +31,8 @@ const MessageItem = (props) => {
   )
 }
 
-export const Dialogs = ({state, dispatch}) => {
-  const { dialogs, messages } = state;
+export const Dialogs = ({store, dispatch}) => {
+  const { dialogs, messages } = store;
   return (
     <div className={`${s.content} container`}>
       <div className={s.dialogs}>

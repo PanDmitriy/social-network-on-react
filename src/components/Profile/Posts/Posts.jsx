@@ -4,14 +4,13 @@ import { Icon } from '@material-ui/core';
 import { Button, TextField, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Post } from './Post/Post';
-import { addNewPostActionCreate } from '../../../Redux/profileReducer';
 
 const Alert = props => (
   <MuiAlert elevation={6} variant='filled' {...props} />
 )
 
-export const Posts = props => {
-  const posts = props.state.posts;
+export const Posts = ({ addNewPost, posts, }) => {
+  console.log(posts);
 
   const [ valueNewPost, setValueNewPost ] = React.useState('')
   const [ alert, setAlert ] = React.useState({
@@ -27,7 +26,7 @@ export const Posts = props => {
     setAlert({...alert, open: false,});
   };
 
-  const addNewPost = () => {
+  const onAddNewPost = () => {
     if (!valueNewPost.trim('')){
       setAlert({ 
         ...alert, 
@@ -37,7 +36,7 @@ export const Posts = props => {
       });
       return
     }
-    props.dispatch(addNewPostActionCreate(valueNewPost));
+  addNewPost(valueNewPost)
     setValueNewPost('');
     setAlert({
       ...alert,
@@ -65,7 +64,7 @@ export const Posts = props => {
           /> 
           <Button
             startIcon={<Icon>create</Icon>}
-            onClick={addNewPost}
+            onClick={onAddNewPost}
           >
             Create
           </Button>
@@ -82,12 +81,10 @@ export const Posts = props => {
         </div> 
       </div>
       <div className={s.posts}>
-        { 
-          posts.map(
-          post => (
+        { posts.map( 
+            post => (
               <Post key={post.id} message={post.message} like={post.likesCount} />
-            )
-          ) 
+          ))
         }
       </div>
     </>
