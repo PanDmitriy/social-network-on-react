@@ -4,13 +4,13 @@ import { Header } from './components/Header/Header';
 import { Navbar } from './components/Navbar/Navbar';
 import { Footer } from './components/Footer/Footer';
 import { UserCard } from './components/Profile/UserCard/UserCard';
-import { Dialogs } from './components/Dialogs/Dialogs';
 import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Main } from './components/Main/Main';
+import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 
 function App(props) {
   return (
@@ -36,7 +36,7 @@ function App(props) {
             <Route 
               path='/dialogs' 
               render={ () => 
-                <Dialogs 
+                <DialogsContainer 
                   store={props.store.dialogsPage}
                   dispatch={props.dispatch}
                 /> 
