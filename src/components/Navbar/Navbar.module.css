@@ -1,6 +1,6 @@
 
 .nav {
-  background-color: aqua;
+  /* background-color: aqua; */
   margin: 0.2rem;
   grid-area: navbar;
   display: flex;
@@ -15,7 +15,7 @@
 .item {
   padding-bottom: 0.5rem;
   text-decoration: none;
-  color: aliceblue;
+  color: #222;
 }
 
 .item:hover {
