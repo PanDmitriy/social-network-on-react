@@ -5,15 +5,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './Redux/store';
+import { Provider } from './StoreContext';
 
 const rerenderEntireTree = (state) => {
   console.log('Store: ', state);
   ReactDOM.render(
     <React.StrictMode>
-      <App 
-        store={state} 
-        dispatch={store.dispatch.bind(store)} 
-      />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );

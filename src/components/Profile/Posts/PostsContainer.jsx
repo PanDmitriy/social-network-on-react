@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { addNewPostActionCreate } from '../../../Redux/profileReducer';
+import StoreContext from '../../../StoreContext';
 import { Posts } from './Posts';
 
 
 export const PostsContainer = props => {
 
-  const addNewPost = (valueNewPost) => {
-    props.dispatch(addNewPostActionCreate(valueNewPost));
-  }
-
-
-
   return (
-      <Posts addNewPost={addNewPost} posts={props.store.posts} />
+    <StoreContext.Consumer> 
+      {
+        store => {
+          const addNewPost = (valueNewPost) => {
+            store.dispatch(addNewPostActionCreate(valueNewPost));
+          }
+          return (
+            <Posts addNewPost={addNewPost} posts={store.getState().profilePage.posts} />
+          )
+
+        }
+      }
+    </StoreContext.Consumer>
   )
 }

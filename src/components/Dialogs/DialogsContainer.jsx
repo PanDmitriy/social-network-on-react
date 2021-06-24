@@ -1,9 +1,18 @@
 import React from 'react';
+import StoreContext from '../../StoreContext';
 import { Dialogs } from './Dialogs';
 
-export const DialogsContainer = ({store, dispatch}) => {
-  const { dialogs, messages } = store;
+export const DialogsContainer = () => {
   return (
-    <Dialogs dialogs={dialogs} messages={messages} dispatch={dispatch} />
+    <StoreContext.Consumer>
+      {
+        store => {
+          const { dialogs, messages } = store.getState().dialogsPage;
+          return (
+            <Dialogs dialogs={dialogs} messages={messages} dispatch={store.dispatch} />
+          )
+        }
+      }
+    </StoreContext.Consumer>
   )
 }
