@@ -19,9 +19,9 @@
 }
 
 .item:hover {
-  color: coral;
+  color: rgb(0, 8, 255);
 }
 
-.items .activeLink {
-  color: darkcyan;
+.activeLink span {
+  color: rgb(84, 95, 255);
 }
