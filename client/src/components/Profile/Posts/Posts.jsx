@@ -10,7 +10,6 @@ const Alert = props => (
 )
 
 export const Posts = ({ addNewPost, posts, }) => {
-  console.log(posts);
 
   const [ valueNewPost, setValueNewPost ] = React.useState('')
   const [ alert, setAlert ] = React.useState({

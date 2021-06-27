@@ -28,9 +28,7 @@ const dialogsReducer = (state = initState, action) => {
         id: Date.now().toString(),
         message: action.value,
       };
-      state.messages.push(newMessage);
-      console.log('New state App', state)
-      return state;
+      return {...state, ...state.messages.push(newMessage)};
     default: return state;
   }
 };

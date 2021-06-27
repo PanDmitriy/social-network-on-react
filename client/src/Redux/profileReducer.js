@@ -17,9 +17,7 @@ const profileReducer = (state = initState, action) => {
         message: action.value,
         likesCount: 0
       };
-      state.posts.push(newPost);
-      console.log('New state App', state)
-      return state;
+      return {...state, ...state.posts.push(newPost)}
     default: return state
   }
 };
