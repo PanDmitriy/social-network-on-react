@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
 import Avatar from '@material-ui/core/Avatar';
 import FaceIcon  from '@material-ui/icons/Face';
-import { FormSendMessage } from './FormSendMessage/FormSendMessage';
+import { FormSendMessageContainer } from './FormSendMessage/FormSendMessageContainer';
 
 const DialogItem = (props) => {
   const path = `/dialogs/${props.id}`
@@ -31,12 +31,13 @@ const MessageItem = (props) => {
   )
 }
 
-export const Dialogs = ({ dialogs, messages, dispatch}) => {
+export const Dialogs = (props) => {
+  console.log(props);
   return (
     <div className={`${s.content} container`}>
       <div className={s.dialogs}>
         {
-          dialogs.map( 
+          props.dialogs.map( 
             dialog => (
               <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>
             )
@@ -46,15 +47,15 @@ export const Dialogs = ({ dialogs, messages, dispatch}) => {
       <div className={s.columnRight}>
         <div className={s.messages}>
           {
-            messages.map(
+            props.messages.map(
               message => (
                 <MessageItem key={message.id} message={message.message}/>
               )
             )
           }
         </div>
-          <FormSendMessage dispatch={dispatch} />
-        </div>
+        <FormSendMessageContainer />
       </div>
+    </div>
   )
 }

@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './Redux/store';
-import { Provider } from './StoreContext';
+import { Provider } from 'react-redux';
 
 const rerenderEntireTree = (state) => {
   console.log('Store: ', state);

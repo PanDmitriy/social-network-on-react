@@ -13,7 +13,7 @@ export const FormSendMessage = props => {
     // console.log();
   }
   const sendMessage = () => {
-    props.dispatch(sendMessageActionCreate(textMessage));
+    props.sendMessage(textMessage);
     setTextMessage('');
   }
   const keyPressHandler = event => {
