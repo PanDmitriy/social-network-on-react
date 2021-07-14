@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import s from './FormSendMessage.module.css';
 import { Button, Icon, TextField } from '@material-ui/core';
-import { sendMessageActionCreate } from '../../../Redux/dialogsReducer';
 
 
 

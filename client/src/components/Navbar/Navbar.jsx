@@ -5,6 +5,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ForumIcon from '@material-ui/icons/Forum';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import SettingsIcon from '@material-ui/icons/Settings';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
 import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => (
@@ -15,15 +17,29 @@ export const Navbar = () => (
       <NavLink to='/profile' className={s.item} activeClassName={s.activeLink}>
         <MenuItem>
           <ListItemIcon>
-            <AccountCircleIcon/>
+            <AccountCircleIcon
+              fontSize='large'
+            />
           </ListItemIcon>
           <Typography variant="inherit">Profile</Typography>
+        </MenuItem>
+        </NavLink>
+      <NavLink to='/users' className={s.item} activeClassName={s.activeLink}>
+        <MenuItem>
+          <ListItemIcon>
+            <SupervisedUserCircleIcon
+              fontSize='large'
+            />
+          </ListItemIcon>
+          <Typography variant="inherit">Users</Typography>
         </MenuItem>
         </NavLink>
         <NavLink to='/dialogs' className={s.item} activeClassName={s.activeLink}>
         <MenuItem>
           <ListItemIcon>
-            <ForumIcon/>
+            <ForumIcon
+              fontSize='large'
+            />
           </ListItemIcon>
           <Typography variant="inherit">Message</Typography>
         </MenuItem>
@@ -31,15 +47,29 @@ export const Navbar = () => (
         <NavLink to='/music' className={s.item} activeClassName={s.activeLink}>
         <MenuItem>
           <ListItemIcon>
-            <LibraryMusicIcon/>
+            <LibraryMusicIcon
+              fontSize='large'
+            />
           </ListItemIcon>
           <Typography variant="inherit">Music</Typography>
+        </MenuItem>
+        </NavLink>
+        <NavLink to='/news' className={s.item} activeClassName={s.activeLink}>
+        <MenuItem>
+          <ListItemIcon>
+            <ImportantDevicesIcon
+              fontSize='large'
+            />
+          </ListItemIcon>
+          <Typography variant="inherit">News</Typography>
         </MenuItem>
         </NavLink>
         <NavLink to='/settings' className={s.item} activeClassName={s.activeLink}>
         <MenuItem>
           <ListItemIcon>
-            <SettingsIcon/>
+            <SettingsIcon
+              fontSize='large'
+            />
           </ListItemIcon>
           <Typography variant="inherit">Settings</Typography>
         </MenuItem>

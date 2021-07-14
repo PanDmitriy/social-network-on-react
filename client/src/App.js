@@ -11,6 +11,7 @@ import { Settings } from './components/Settings/Settings';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Main } from './components/Main/Main';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import { UsersContainer } from './components/Users/UsersContainer';
 
 function App(props) {
   return (
@@ -26,25 +27,40 @@ function App(props) {
             </Route>
             <Route 
               path='/profile' 
-              render={() => 
-                <Profile/>
+              render={
+                () =><Profile/>
               } 
             />
             <Route 
               path='/dialogs' 
-              render={ () => 
-                <DialogsContainer /> 
-                }
+              render={
+                () => <DialogsContainer /> 
+              }
             />
-            <Route path='/news'>
-              <News/>
-            </Route>
-            <Route path='/music'>
-              <Music/>
-            </Route>
-            <Route path='/settings'>
-              <Settings/>
-            </Route>
+            <Route 
+              path='/news'
+              render={
+                () => <News/>
+              }
+            />
+            <Route 
+              path='/users'
+              render={
+                () => <UsersContainer/>
+              }
+            />
+            <Route 
+              path='/music'
+              render={
+                () => <Music/>
+              }
+            />
+            <Route 
+              path='/settings'
+              render={
+                () =>  <Settings/>
+              }
+            />
           </Switch>
         </div>
         <Footer/>

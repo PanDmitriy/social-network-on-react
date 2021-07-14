@@ -31,31 +31,28 @@ const MessageItem = (props) => {
   )
 }
 
-export const Dialogs = (props) => {
-  console.log(props);
-  return (
-    <div className={`${s.content} container`}>
-      <div className={s.dialogs}>
+export const Dialogs = (props) => (
+  <div className={`${s.content} container`}>
+    <div className={s.dialogs}>
+      {
+        props.dialogs.map( 
+          dialog => (
+            <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>
+          )
+        )
+      }
+    </div>
+    <div className={s.columnRight}>
+      <div className={s.messages}>
         {
-          props.dialogs.map( 
-            dialog => (
-              <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>
+          props.messages.map(
+            message => (
+              <MessageItem key={message.id} message={message.message}/>
             )
           )
         }
       </div>
-      <div className={s.columnRight}>
-        <div className={s.messages}>
-          {
-            props.messages.map(
-              message => (
-                <MessageItem key={message.id} message={message.message}/>
-              )
-            )
-          }
-        </div>
-        <FormSendMessageContainer />
-      </div>
+      <FormSendMessageContainer />
     </div>
-  )
-}
+  </div>
+)
