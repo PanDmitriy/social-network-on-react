@@ -8,7 +8,7 @@ import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { Main } from './components/Main/Main';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
@@ -22,7 +22,7 @@ function App(props) {
         <Navbar/>
         <div className='content'>
           <Switch>
-            <Route exact path='/social-network-on-react'>
+            <Route exact path='/'>
               <Main/>
             </Route>
             <Route 
@@ -61,6 +61,7 @@ function App(props) {
                 () =>  <Settings/>
               }
             />
+            <Redirect to='/' />
           </Switch>
         </div>
         <Footer/>
