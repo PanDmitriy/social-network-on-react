@@ -38,6 +38,63 @@ class UsersWrapperComponent extends Component {
             console.log(e);
           }
         });
+      // this.props.setUsers([
+      //   {
+      //     name: "Wenom",
+      //     id: 18314,
+      //     uniqueUrlName: null,
+      //     photos: {
+      //     small: null,
+      //     large: null
+      //     },
+      //     status: null,
+      //     followed: false
+      //   },
+      //   {
+      //     name: "romanxeo",
+      //     id: 18313,
+      //     uniqueUrlName: null,
+      //     photos: {
+      //     small: null,
+      //     large: null
+      //     },
+      //     status: null,
+      //     followed: false
+      //   },
+      //   {
+      //     name: "rescuer-net",
+      //     id: 18312,
+      //     uniqueUrlName: null,
+      //     photos: {
+      //     small: null,
+      //     large: null
+      //     },
+      //     status: null,
+      //     followed: false
+      //   },
+      //   {
+      //     name: "Farhod",
+      //     id: 18311,
+      //     uniqueUrlName: null,
+      //     photos: {
+      //     small: null,
+      //     large: null
+      //     },
+      //     status: null,
+      //     followed: false
+      //   },
+      //   {
+      //     name: "faceless49",
+      //     id: 18310,
+      //     uniqueUrlName: null,
+      //     photos: {
+      //     small: null,
+      //     large: null
+      //     },
+      //     status: null,
+      //     followed: true
+      //   }
+      // ])
     }
   };
 
@@ -68,33 +125,31 @@ class UsersWrapperComponent extends Component {
     }
     return (
       <>
-        { 
-          this.props.isLoading 
-            ? <LinearProgress />
-            : <>
-                <StepperPagesSwitch
-                  stepsMax={pages.length}
-                  activeStep={this.props.pageCounter-1}
-                  clickNext={()=> this.onPageChanged(this.props.pageCounter + 1)}
-                  clickBack={()=> this.onPageChanged(this.props.pageCounter - 1)}
-                  disabledNextButton={this.props.pageCounter === pages.length}
-                  disabledBackButton={this.props.pageCounter === 1}
+        <StepperPagesSwitch
+          stepsMax={pages.length}
+          activeStep={this.props.pageCounter-1}
+          clickNext={()=> this.onPageChanged(this.props.pageCounter + 1)}
+          clickBack={()=> this.onPageChanged(this.props.pageCounter - 1)}
+          disabledNextButton={this.props.pageCounter <= pages.length}
+          disabledBackButton={this.props.pageCounter >= 1}
+        />
+          { 
+            this.props.isLoading 
+              ? <LinearProgress />
+              : <Users
+                  users={this.props.users}
+                  subscribeToUser={this.subscribeToUser}
+                  unsubscribeToUser={this.unsubscribeToUser}
                 />
-                  <Users
-                    users={this.props.users}
-                    subscribeToUser={this.subscribeToUser}
-                    unsubscribeToUser={this.unsubscribeToUser}
-                  />
-                <StyledPagination
-                  count={pages.length}
-                  showFirstButton 
-                  showLastButton
-                  page={this.props.pageCounter}
-                  defaultPage={this.props.pageCounter}
-                  onChange={ (e, p) => this.onPageChanged(p)}
-                />
-              </>
-        }
+          }
+        <StyledPagination
+          count={pages.length}
+          showFirstButton 
+          showLastButton
+          page={this.props.pageCounter}
+          defaultPage={this.props.pageCounter}
+          onChange={ (e, p) => this.onPageChanged(p)}
+        />
         {/* <div className={s.stepperPanel}>
           {pages.map((n) => {
             return (
