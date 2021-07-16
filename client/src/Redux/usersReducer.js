@@ -1,17 +1,24 @@
 const SET_USERS = 'SET_USERS';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';
+const TO_SWITCH_USERS_PAGE = 'TO_SWITCH_USERS_PAGE';
 
 const initState = {
   users: [],
-  pageSize: 5,
+  pageSize: 14,
   totalUsersCount: 0,
+  pageCounter: 1,
 };
 
 const usersReducer = (state = initState, action) => {
   switch (action.type) {
     case SET_USERS:
-      return {...state, users: [...state.users, ...action.payload]}
+      return {...state, users: [...action.payload]}
+    case TO_SWITCH_USERS_PAGE:
+      return {...state, pageCounter: action.payload}
+    case SET_TOTAL_USERS_COUNT:
+      return {...state, totalUsersCount: action.payload}
     case FOLLOW_USER:
       // console.log(action.payload);
       return {...state, users: [...state.users.map( user => {
@@ -39,17 +46,31 @@ export const setUsersAC = users => (
   }
 )
 
-export const followUserAC = userId => (
+export const setTotalUsersCountsAC = number => (
   {
-    type: FOLLOW_USER,
-    payload: userId,
+    type: SET_TOTAL_USERS_COUNT,
+    payload: number,
   }
 )
 
-export const unfollowUserAC = userId => (
+export const followUserAC = id => (
+  {
+    type: FOLLOW_USER,
+    payload: id,
+  }
+)
+
+export const unfollowUserAC = id => (
   {
     type: UNFOLLOW_USER,
-    payload: userId,
+    payload: id,
+  }
+)
+
+export const toSwitchUsersPageAC = number => (
+  {
+    type: TO_SWITCH_USERS_PAGE,
+    payload: number,
   }
 )
 

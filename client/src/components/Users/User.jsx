@@ -8,7 +8,6 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 export const User = (props) => {
   const { name, id, status, photos, uniqueUrlName, followed, subscribeToUser, unsubscribeToUser} = props;
   const isSubscriberButtonClick = userId => {
-    console.log(userId);
     followed ? unsubscribeToUser(userId) : subscribeToUser(userId)
   }
   return (

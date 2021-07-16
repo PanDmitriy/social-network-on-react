@@ -1,10 +1,18 @@
+import React, { Component } from 'react';
+import s from './User.module.css'
+import { connect } from 'react-redux';
+import { 
+  followUserAC, 
+  setTotalUsersCountsAC, 
+  setUsersAC, 
+  toSwitchUsersPageAC, 
+  unfollowUserAC 
+} from '../../Redux/usersReducer';
+import { User } from './User';
 import { List } from '@material-ui/core';
 import axios from 'axios';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { followUserAC, setUsersAC, unfollowUserAC } from '../../Redux/usersReducer';
-import { User } from './User';
-
+import { StepperPagesSwitch } from '../utils/StepperPagesSwitch';
+import StyledPagination from '../utils/StyledPagination';
 class Users extends Component {
   // constructor(props) {
   //   super(props);
@@ -14,106 +22,88 @@ class Users extends Component {
   
   componentDidMount() {
     if (this.props.users.length === 0) { 
-
-      axios.get('https://social-network.samuraijs.com/api/1.0/users')
-        .then((response) => 
-          // console.log(response.data.items),
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.pageCounter}`)
+        .then((response) => {
           this.props.setUsers(response.data.items)
-        );
-      // this.props.setUsers([
-      //   {
-      //     name: "Wenom",
-      //     id: 18314,
-      //     uniqueUrlName: null,
-      //     photos: {
-      //     small: null,
-      //     large: null
-      //     },
-      //     status: null,
-      //     followed: false
-      //   },
-      //   {
-      //     name: "romanxeo",
-      //     id: 18313,
-      //     uniqueUrlName: null,
-      //     photos: {
-      //     small: null,
-      //     large: null
-      //     },
-      //     status: null,
-      //     followed: false
-      //   },
-      //   {
-      //     name: "rescuer-net",
-      //     id: 18312,
-      //     uniqueUrlName: null,
-      //     photos: {
-      //     small: null,
-      //     large: null
-      //     },
-      //     status: null,
-      //     followed: false
-      //   },
-      //   {
-      //     name: "Farhod",
-      //     id: 18311,
-      //     uniqueUrlName: null,
-      //     photos: {
-      //     small: null,
-      //     large: null
-      //     },
-      //     status: null,
-      //     followed: false
-      //   },
-      //   {
-      //     name: "faceless49",
-      //     id: 18310,
-      //     uniqueUrlName: null,
-      //     photos: {
-      //     small: null,
-      //     large: null
-      //     },
-      //     status: null,
-      //     followed: true
-      //   }
-      // ])
+          this.props.setTotalUsersCounts(response.data.totalCount)
+        });
     }
   };
 
   subscribeToUser = userId => {
     this.props.followUser(userId)
-    console.log(userId);
     
   }
 
   unsubscribeToUser = userId => {
     this.props.unfollowUser(userId)
-    console.log(userId);
+  }
+
+  onPageChanged = numberPage => {
+    this.props.toSwitchUsersPage(numberPage);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${numberPage}`)
+    .then((response) => 
+      this.props.setUsers(response.data.items)
+    );
   }
 
   render() {
-    let pagesCount = this.props.totalUsersCount / this.props.pageSize;
+    let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
     let pages = [];
     for (let i = 1; i<=pagesCount; i++) {
       pages.push(i);
     }
+    console.log('PROPS', this.props);
+    console.log('pages',  pages);
+    console.log('pagesCount', pagesCount);
     return (
       <List>
-        {
-          this.props.users.map( user => 
-              <User
-                key={user.id}
-                id={user.id}
-                name={user.name}
-                status={user.status}
-                photos={user.photos}
-                uniqueUrlName={user.uniqueUrlName}
-                followed={user.followed}
-                subscribeToUser={this.subscribeToUser}
-                unsubscribeToUser={this.unsubscribeToUser}
-              />
-          )
-        }
+        <StepperPagesSwitch
+          stepsMax={pages.length}
+          activeStep={this.props.pageCounter-1}
+          clickNext={()=> this.onPageChanged(this.props.pageCounter + 1)}
+          clickBack={()=> this.onPageChanged(this.props.pageCounter - 1)}
+          disabledNextButton={this.props.pageCounter === pages.length}
+          disabledBackButton={this.props.pageCounter === 1}
+        />
+        {/* <div className={s.stepperPanel}>
+          {pages.map((n) => {
+            return (
+              <span 
+                className={
+                  this.props.pageCounter === n ? s.selected : s.itemCountPage
+                }
+                onClick={() => this.onPageChanged(n)}
+              >
+                {n}
+              </span>
+            )
+          })}
+        </div> */}
+        
+          {
+            this.props.users.map( user => 
+                <User
+                  key={user.id}
+                  id={user.id}
+                  name={user.name}
+                  status={user.status}
+                  photos={user.photos}
+                  uniqueUrlName={user.uniqueUrlName}
+                  followed={user.followed}
+                  subscribeToUser={this.subscribeToUser}
+                  unsubscribeToUser={this.unsubscribeToUser}
+                />
+            )
+          }
+          <StyledPagination
+            count={pages.length}
+            showFirstButton 
+            showLastButton
+            page={this.props.pageCounter}
+            defaultPage={this.props.pageCounter}
+            onChange={ (e, p) => this.onPageChanged(p)}
+          />
       </List>
     )
   }
@@ -124,6 +114,8 @@ const mapStateToProps = (state) => {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
+    pageCounter: state.usersPage.pageCounter,
+
   }
 }
 
@@ -138,6 +130,12 @@ const mapDispatchToProps = (dispatch) => {
     unfollowUser: userId => {
       dispatch(unfollowUserAC(userId))
     },
+    toSwitchUsersPage: number => {
+      dispatch(toSwitchUsersPageAC(number))
+    },
+    setTotalUsersCounts: number => {
+      dispatch(setTotalUsersCountsAC(number))
+    }
   }
 }
 
