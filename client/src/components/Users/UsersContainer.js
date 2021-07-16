@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { 
   followUserAC, 
+  isLoadingFalseAC, 
+  isLoadingTrueAC, 
   setTotalUsersCountsAC, 
   setUsersAC, 
   toSwitchUsersPageAC, 
   unfollowUserAC 
 } from '../../Redux/usersReducer';
 import axios from 'axios';
+import { LinearProgress } from '@material-ui/core';
 import { StepperPagesSwitch } from '../utils/StepperPagesSwitch';
 import StyledPagination from '../utils/StyledPagination';
 import { Users } from './Users';
+import s from './User.module.css'
 
 
 class UsersWrapperComponent extends Component {
@@ -23,10 +27,16 @@ class UsersWrapperComponent extends Component {
   
   componentDidMount() {
     if (this.props.users.length === 0) { 
+      this.props.isLoadingTrue()
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.pageCounter}`)
         .then((response) => {
-          this.props.setUsers(response.data.items)
-          this.props.setTotalUsersCounts(response.data.totalCount)
+          try {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCounts(response.data.totalCount)
+            this.props.isLoadingFalse()
+          } catch(e) {
+            console.log(e);
+          }
         });
     }
   };
@@ -42,10 +52,12 @@ class UsersWrapperComponent extends Component {
 
   onPageChanged = numberPage => {
     this.props.toSwitchUsersPage(numberPage);
+    this.props.isLoadingTrue()
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${numberPage}`)
-    .then((response) => 
-      this.props.setUsers(response.data.items)
-    );
+    .then((response) => {
+      this.props.setUsers(response.data.items);
+      this.props.isLoadingFalse()
+    });
   }
 
   render() {
@@ -56,28 +68,33 @@ class UsersWrapperComponent extends Component {
     }
     return (
       <>
-        <StepperPagesSwitch
-          stepsMax={pages.length}
-          activeStep={this.props.pageCounter-1}
-          clickNext={()=> this.onPageChanged(this.props.pageCounter + 1)}
-          clickBack={()=> this.onPageChanged(this.props.pageCounter - 1)}
-          disabledNextButton={this.props.pageCounter === pages.length}
-          disabledBackButton={this.props.pageCounter === 1}
-        />
-          {/* {this.props.users.length === 0 ?  */}
-          <Users
-            users={this.props.users}
-            subscribeToUser={this.subscribeToUser}
-            unsubscribeToUser={this.unsubscribeToUser}
-          />
-        <StyledPagination
-          count={pages.length}
-          showFirstButton 
-          showLastButton
-          page={this.props.pageCounter}
-          defaultPage={this.props.pageCounter}
-          onChange={ (e, p) => this.onPageChanged(p)}
-        />
+        { 
+          this.props.isLoading 
+            ? <LinearProgress />
+            : <>
+                <StepperPagesSwitch
+                  stepsMax={pages.length}
+                  activeStep={this.props.pageCounter-1}
+                  clickNext={()=> this.onPageChanged(this.props.pageCounter + 1)}
+                  clickBack={()=> this.onPageChanged(this.props.pageCounter - 1)}
+                  disabledNextButton={this.props.pageCounter === pages.length}
+                  disabledBackButton={this.props.pageCounter === 1}
+                />
+                  <Users
+                    users={this.props.users}
+                    subscribeToUser={this.subscribeToUser}
+                    unsubscribeToUser={this.unsubscribeToUser}
+                  />
+                <StyledPagination
+                  count={pages.length}
+                  showFirstButton 
+                  showLastButton
+                  page={this.props.pageCounter}
+                  defaultPage={this.props.pageCounter}
+                  onChange={ (e, p) => this.onPageChanged(p)}
+                />
+              </>
+        }
         {/* <div className={s.stepperPanel}>
           {pages.map((n) => {
             return (
@@ -103,6 +120,7 @@ const mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     pageCounter: state.usersPage.pageCounter,
+    isLoading: state.usersPage.isLoading,
 
   }
 }
@@ -123,7 +141,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     setTotalUsersCounts: number => {
       dispatch(setTotalUsersCountsAC(number))
-    }
+    },
+    isLoadingTrue: () => {
+      dispatch(isLoadingTrueAC())
+    },
+    isLoadingFalse: () => {
+      dispatch(isLoadingFalseAC())
+    },
   }
 }
 

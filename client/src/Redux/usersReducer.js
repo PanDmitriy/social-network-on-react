@@ -3,12 +3,15 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';
 const TO_SWITCH_USERS_PAGE = 'TO_SWITCH_USERS_PAGE';
+const IS_LOADING_TRUE = 'IS_LOADING_TRUE';
+const IS_LOADING_FALSE = 'IS_LOADING_FALSE';
 
 const initState = {
   users: [],
   pageSize: 14,
   totalUsersCount: 0,
   pageCounter: 1,
+  isLoading: false,
 };
 
 const usersReducer = (state = initState, action) => {
@@ -35,6 +38,10 @@ const usersReducer = (state = initState, action) => {
         }
         return user
       })]}
+    case IS_LOADING_TRUE:
+      return {...state, isLoading: action.payload}
+    case IS_LOADING_FALSE:
+      return {...state, isLoading: action.payload}
     default: return state
   }
 };
@@ -71,6 +78,20 @@ export const toSwitchUsersPageAC = number => (
   {
     type: TO_SWITCH_USERS_PAGE,
     payload: number,
+  }
+)
+
+export const isLoadingTrueAC = () => (
+  {
+    type: IS_LOADING_TRUE,
+    payload: true,
+  }
+)
+
+export const isLoadingFalseAC = () => (
+  {
+    type: IS_LOADING_FALSE,
+    payload: false,
   }
 )
 
