@@ -22,7 +22,8 @@ const profileReducer = (state = initState, action) => {
   }
 };
 
-export const addNewPostActionCreate = value => (
+// Action creaters ===================
+export const addNewPost = value => (
   {
     type: ADD_NEW_POST,
     value: value,

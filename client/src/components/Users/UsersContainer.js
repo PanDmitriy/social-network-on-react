@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { 
-  followUserAC, 
-  isLoadingFalseAC, 
-  isLoadingTrueAC, 
-  setTotalUsersCountsAC, 
-  setUsersAC, 
-  toSwitchUsersPageAC, 
-  unfollowUserAC 
+  followUser, 
+  isLoadingFalse, 
+  isLoadingTrue, 
+  setTotalUsersCounts, 
+  setUsers, 
+  toSwitchUsersPage, 
+  unfollowUser 
 } from '../../Redux/usersReducer';
 import axios from 'axios';
 import { LinearProgress } from '@material-ui/core';
@@ -125,30 +125,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUsers: users => {
-      dispatch(setUsersAC(users))
-    },
-    followUser: userId => {
-      dispatch(followUserAC(userId))
-    },
-    unfollowUser: userId => {
-      dispatch(unfollowUserAC(userId))
-    },
-    toSwitchUsersPage: number => {
-      dispatch(toSwitchUsersPageAC(number))
-    },
-    setTotalUsersCounts: number => {
-      dispatch(setTotalUsersCountsAC(number))
-    },
-    isLoadingTrue: () => {
-      dispatch(isLoadingTrueAC())
-    },
-    isLoadingFalse: () => {
-      dispatch(isLoadingFalseAC())
-    },
-  }
-}
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersWrapperComponent);
+export const UsersContainer = connect(mapStateToProps, {
+  setUsers,
+  followUser,
+  unfollowUser,
+  toSwitchUsersPage,
+  setTotalUsersCounts,
+  isLoadingTrue,
+  isLoadingFalse,
+})(UsersWrapperComponent);

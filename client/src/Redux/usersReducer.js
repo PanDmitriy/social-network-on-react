@@ -46,49 +46,49 @@ const usersReducer = (state = initState, action) => {
   }
 };
 
-export const setUsersAC = users => (
+export const setUsers = users => (
   {
     type: SET_USERS,
     payload: users,
   }
 )
 
-export const setTotalUsersCountsAC = number => (
+export const setTotalUsersCounts = number => (
   {
     type: SET_TOTAL_USERS_COUNT,
     payload: number,
   }
 )
 
-export const followUserAC = id => (
+export const followUser = id => (
   {
     type: FOLLOW_USER,
     payload: id,
   }
 )
 
-export const unfollowUserAC = id => (
+export const unfollowUser = id => (
   {
     type: UNFOLLOW_USER,
     payload: id,
   }
 )
 
-export const toSwitchUsersPageAC = number => (
+export const toSwitchUsersPage = number => (
   {
     type: TO_SWITCH_USERS_PAGE,
     payload: number,
   }
 )
 
-export const isLoadingTrueAC = () => (
+export const isLoadingTrue = () => (
   {
     type: IS_LOADING_TRUE,
     payload: true,
   }
 )
 
-export const isLoadingFalseAC = () => (
+export const isLoadingFalse = () => (
   {
     type: IS_LOADING_FALSE,
     payload: false,
